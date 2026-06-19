@@ -63,3 +63,93 @@
 </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACSZ BLOOD LINE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --blood-red: #B71C1C; --emerald-green: #2E7D32; --bg: #F8F9FA; }
+        body { margin: 0; font-family: sans-serif; background: var(--bg); display: flex; justify-content: center; height: 100vh; }
+        .app-container { width: 100%; max-width: 430px; background: white; height: 100vh; position: relative; overflow-y: auto; }
+        
+        /* স্প্ল্যাশ স্ক্রিন */
+        #splash { position: fixed; top:0; width: 100%; max-width: 430px; height: 100%; background: var(--blood-red); color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 999; }
+        
+        /* হোম পেজ */
+        .header { background: var(--blood-red); color: white; padding: 20px; font-weight: bold; font-size: 20px; text-align: center; }
+        .welcome-card { background: var(--blood-red); color: white; padding: 20px; margin: 15px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
+        .btn { flex: 1; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        
+        .donor-banner { background: var(--emerald-green); color: white; padding: 15px; margin: 0 15px; border-radius: 10px; text-align: center; font-weight: bold; }
+        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; margin-bottom: 70px; }
+        .card { background: white; border: 1px solid #ddd; padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        
+        .nav-bar { display: flex; justify-content: space-around; padding: 15px; border-top: 1px solid #ddd; position: fixed; bottom: 0; width: 100%; max-width: 430px; background: white; z-index: 100; }
+    </style>
+</head>
+<body>
+
+    <!-- স্প্ল্যাশ স্ক্রিন -->
+    <div id="splash">
+        <h1 style="margin:0;">ACSZ BLOOD LINE</h1>
+        <p style="position:absolute; bottom:20px; font-size:12px; letter-spacing:2px;">DEVELOPER BY MOHAMMAD MINHAZ</p>
+    </div>
+
+    <!-- মেইন অ্যাপ -->
+    <div class="app-container" id="main-ui" style="display:none;">
+        <div class="header">ACSZ BLOOD LINE</div>
+        <div class="welcome-card">
+            <div id="user-name-display">স্বাগতম, ইউজার!</div>
+            <div class="btn-group">
+                <button class="btn" style="background:white; color:var(--blood-red);">+ রক্তের আবেদন</button>
+                <button class="btn" style="background:transparent; border:1px solid white;">Q রক্তদাতা খুঁজুন</button>
+            </div>
+        </div>
+
+        <div class="donor-banner">Donor List (রক্তদাতা তালিকা)</div>
+
+        <div class="dashboard">
+            <div class="card"><i class="fa-solid fa-rss"></i><br>Blood Feed</div>
+            <div class="card"><i class="fa-solid fa-list"></i><br>My Requests</div>
+            <div class="card"><i class="fa-solid fa-heart"></i><br>উপকারিতা</div>
+            <div class="card" onclick="window.open('https://www.facebook.com/share/17YCHDajei/', '_blank')">
+                <i class="fa-solid fa-users"></i><br>স্বেচ্ছাসেবক
+            </div>
+        </div>
+
+        <div class="nav-bar">
+            <div onclick="window.open('https://www.facebook.com/share/1C3HtgVmWo/', '_blank')"><i class="fa-solid fa-user"></i><br>Profile</div>
+            <div><i class="fa-solid fa-magnifying-glass"></i><br>Donor</div>
+            <div style="color:var(--blood-red); font-size:24px;"><i class="fa-solid fa-plus-circle"></i></div>
+            <div><i class="fa-solid fa-rss"></i><br>Feed</div>
+            <div><i class="fa-solid fa-house"></i><br>Home</div>
+        </div>
+    </div>
+
+    <!-- লগইন পেজ -->
+    <div id="login-ui" style="padding: 40px; display:none; text-align:center;">
+        <h2>নিবন্ধন করুন</h2>
+        <input type="text" id="name" placeholder="আপনার নাম লিখুন" style="padding:10px; width:80%;"><br><br>
+        <button onclick="saveUser()" style="padding:10px 20px; background:var(--blood-red); color:white; border:none;">শুরু করুন</button>
+    </div>
+
+    <script>
+        setTimeout(() => { document.getElementById('splash').style.display = 'none'; checkUser(); }, 3000);
+        function checkUser() {
+            if(localStorage.getItem("isRegistered")) {
+                document.getElementById('main-ui').style.display = 'block';
+                document.getElementById('user-name-display').innerText = "স্বাগতম, " + localStorage.getItem("userName") + "!";
+            } else { document.getElementById('login-ui').style.display = 'block'; }
+        }
+        function saveUser() {
+            localStorage.setItem("isRegistered", "true");
+            localStorage.setItem("userName", document.getElementById('name').value);
+            location.reload();
+        }
+    </script>
+</body>
+</html>
