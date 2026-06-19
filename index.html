@@ -126,6 +126,7 @@
 
     <div class="app-container">
         
+        <!-- ১. লোডিং স্ক্রিন -->
         <div id="splash-screen">
             <i class="fa-solid fa-heart-pulse loading-icon"></i>
             <h2>ACSZ BLOOD LINE</h2>
@@ -133,17 +134,20 @@
             <div class="spinner"></div>
         </div>
 
+        <!-- ২. লগইন ও নিবন্ধন স্ক্রিন -->
         <div id="auth-screen">
             <div class="auth-header"><i class="fa-solid fa-droplet"></i><h2>ACSZ BLOOD LINE</h2></div>
             <div class="tab-box">
                 <div class="tab-btn active" id="login-tab" onclick="switchTab('login')">লগইন</div>
                 <div class="tab-btn" id="reg-tab" onclick="switchTab('reg')">নিবন্ধন</div>
             </div>
+            <!-- লগইন ফর্ম -->
             <div id="login-form">
                 <div class="form-group"><label>মোবাইল নম্বর</label><i class="fa-solid fa-phone"></i><input type="tel" id="login-phone" placeholder="আপনার মোবাইল নম্বর"></div>
                 <div class="form-group"><label>পাসওয়ার্ড</label><i class="fa-solid fa-lock"></i><input type="password" id="login-pass" placeholder="পাসওয়ার্ড দিন"></div>
                 <button class="submit-btn" onclick="enterApp()">প্রবেশ করুন</button>
             </div>
+            <!-- নিবন্ধন ফর্ম -->
             <div id="reg-form" style="display: none;">
                 <div class="form-group"><label>পূর্ণ নাম</label><i class="fa-solid fa-user"></i><input type="text" id="reg-name" placeholder="আপনার নাম"></div>
                 <div class="form-group"><label>মোবাইল নম্বর</label><i class="fa-solid fa-phone"></i><input type="tel" id="reg-phone" placeholder="মোবাইল নম্বর"></div>
@@ -157,6 +161,7 @@
             </div>
         </div>
 
+        <!-- ৩. মূল ড্যাশবোর্ড -->
         <div id="main-dashboard">
             <div class="app-header">
                 <span>ACSZ BLOOD LINE</span>
@@ -172,12 +177,14 @@
                 
                 <div style="font-size: 18px; font-weight: 700; margin-bottom: 14px; border-left: 4px solid #D32F2F; padding-left: 8px;">জরুরী রক্তের আবেদনসমূহ</div>
                 
+                <!-- এই বক্সে লাইভ আবেদনগুলো এসে জমা হবে -->
                 <div id="live-posts-container">
                     <p style="text-align:center; color:var(--text-muted); font-size:14px;">কোনো অ্যাক্টিভ আবেদন নেই...</p>
                 </div>
             </div>
         </div>
 
+        <!-- ৪. রক্তের আবেদন করার স্ক্রিন -->
         <div id="request-screen">
             <div class="app-header">
                 <span>রক্তের আবেদন তৈরি করুন</span>
@@ -197,6 +204,7 @@
 
     </div>
 
+    <!-- ফায়ারবেস ডাটাবেজ কানেক্ট করার কোড বা স্ক্রিপ্ট -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
@@ -243,7 +251,7 @@
             var blood = document.getElementById('reg-blood').value;
             var pass = document.getElementById('reg-pass').value;
 
-            if(!name || !phone || !pass) { alert('সবগুলো বক্স সঠিকভাবে পূরণ করুন ভাই!'); return; }
+            if(!name || !phone || !pass) { alert('সবগুলো باکس সঠিকভাবে পূরণ করুন ভাই!'); return; }
 
             // ডাটাবেজে ইউজার সেভ হচ্ছে
             database.ref('users/' + phone).set({
