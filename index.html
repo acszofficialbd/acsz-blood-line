@@ -8,82 +8,52 @@
         body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; margin: 0; display: flex; justify-content: center; }
         .app { width: 100%; max-width: 450px; background: white; min-height: 100vh; position: relative; }
         .page { padding: 20px; display: none; }
-        input, select, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: #B71C1C; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        .header { background: #B71C1C; color: white; padding: 20px; text-align: center; font-size: 20px; font-weight: bold; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; }
-        .card { background: #fff; padding: 20px; border-radius: 12px; border: 1px solid #eee; text-align: center; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); font-weight: bold; color: #333; }
-        #splash { position: fixed; width: 100%; max-width: 450px; height: 100%; background: #B71C1C; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; }
-        .post-card { background: #fff; border: 1px solid #eee; padding: 15px; margin: 10px; border-radius: 10px; border-left: 5px solid #B71C1C; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        input, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 12px; }
+        button { width: 100%; padding: 14px; background: #D32F2F; color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .header { background: #D32F2F; color: white; padding: 20px; text-align: center; font-size: 20px; font-weight: bold; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; }
+        .card { background: #fff; padding: 25px; border-radius: 20px; text-align: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-weight: bold; }
+        .nav-bar { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #eee; }
+        .call-btn { background: #2E7D32; }
     </style>
 </head>
 <body>
 
-<div id="splash">
-    <h1 style="font-size: 30px;">ACSZ BLOOD LINE</h1>
-    <div style="font-size: 50px;">🩸</div>
-    <div style="font-size: 14px; margin-top: 15px;">DEVELOPER BY MOHAMMAD MINHAZ</div>
-</div>
-
 <div class="app">
-    <!-- নিবন্ধন -->
+    <!-- নিবন্ধন ফরম -->
     <div id="reg-page" class="page" style="display: block;">
         <h2>নিবন্ধন করুন</h2>
-        <input type="text" id="r-name" placeholder="আপনার নাম">
-        <input type="tel" id="r-phone" placeholder="মোবাইল নাম্বার">
-        <input type="password" placeholder="পাসওয়ার্ড">
-        <select><option>জেলা নির্বাচন করুন</option><option>Chattogram</option></select>
-        <select><option>রক্তের গ্রুপ</option><option>A+</option><option>B+</option><option>O+</option><option>AB+</option></select>
-        <button onclick="alert('স্বাগতম!'); document.getElementById('reg-page').style.display='none'; document.getElementById('home-page').style.display='block';">নিবন্ধন করুন</button>
+        <input type="text" placeholder="আপনার সম্পূর্ণ নাম">
+        <input type="email" placeholder="ইমেইল এড্রেস">
+        <input type="tel" placeholder="মোবাইল নাম্বার">
+        <input type="number" placeholder="বয়স (Age)">
+        <input type="password" placeholder="নতুন পাসওয়ার্ড">
+        <select><option>রক্তের গ্রুপ</option><option>A+</option><option>B+</option></select>
+        <select id="district-list"><option>আপনার জেলা সিলেক্ট করুন</option><option>Chattogram</option><option>Dhaka</option><option>Sylhet</option><option>Rajshahi</option></select>
+        <button onclick="alert('স্বাগতম!'); document.getElementById('reg-page').style.display='none'; document.getElementById('home-page').style.display='block';">নিবন্ধন সম্পন্ন করুন</button>
     </div>
 
     <!-- হোম পেজ -->
     <div id="home-page" class="page">
         <div class="header">ACSZ BLOOD LINE</div>
         <div class="grid">
-            <div class="card" onclick="document.getElementById('home-page').style.display='none'; document.getElementById('post-need').style.display='block';">🩸 রক্তের জন্য আবেদন করুন</div>
-            <div class="card" onclick="document.getElementById('home-page').style.display='none'; document.getElementById('post-give').style.display='block';">🩸 রক্ত দান করতে চাই</div>
-            <div class="card" onclick="alert('রক্তদানের নিয়ম: সুস্থ ব্যক্তিরা প্রতি ৪ মাস অন্তর রক্ত দিতে পারেন এবং এতে হৃদরোগের ঝুঁকি কমে।');">💡 রক্তদানের নিয়ম</div>
-            <div class="card" onclick="document.getElementById('home-page').style.display='none'; document.getElementById('volunteer').style.display='block';">🛡️ স্বেচ্ছাসেবক</div>
-            <div class="card" style="grid-column: span 2;">👥 ডোনার লিস্ট</div>
+            <div class="card" onclick="alert('রক্তের আবেদনের ফর্ম খুলছে...');">🩸 রক্তের আবেদন</div>
+            <div class="card" onclick="alert('রক্তদাতা খুঁজুন...');">🔍 রক্তদাতা খুঁজুন</div>
+            <div class="card">📝 My Requests</div>
+            <div class="card" onclick="alert('রক্তদানের নিয়ম: সুস্থ ব্যক্তিরা প্রতি ৪ মাস অন্তর রক্ত দিতে পারেন।');">💡 উপকারিতা</div>
+            <div class="card" style="grid-column: span 2;" onclick="document.getElementById('home-page').style.display='none'; document.getElementById('volunteer').style.display='block';">🛡️ স্বেচ্ছাসেবক</div>
         </div>
-        <div id="feed"></div>
+        <div class="nav-bar"><span>হোম</span><span>ডোনার</span><span>+</span><span>ফিড</span><span>প্রোফাইল</span></div>
     </div>
 
-    <!-- স্বেচ্ছাসেবক সেকশন (ইংলিশ) -->
+    <!-- স্বেচ্ছাসেবক (ইংলিশ) -->
     <div id="volunteer" class="page">
         <h2>Anowara Cyber Safety Zone</h2>
         <button onclick="window.location.href='https://www.facebook.com/share/17YCHDajei/'">Follow Now Official Page</button>
-        <button style="background: #333; margin-top: 10px;" onclick="window.location.href='#'">MOHAMMAD MINHAZ</button>
-        <button style="background: #666; margin-top: 10px;" onclick="document.getElementById('volunteer').style.display='none'; document.getElementById('home-page').style.display='block';">Back</button>
-    </div>
-
-    <!-- পোস্ট ফরম: রক্তের প্রয়োজন -->
-    <div id="post-need" class="page">
-        <h2>রক্তের জন্য আবেদন</h2>
-        <input type="text" id="n-name" placeholder="রোগীর নাম">
-        <input type="text" id="n-blood" placeholder="রক্তের গ্রুপ">
-        <input type="tel" id="n-phone" placeholder="ফোন নাম্বার">
-        <button onclick="addPost(document.getElementById('n-name').value, document.getElementById('n-blood').value, document.getElementById('n-phone').value)">আবেদন করুন</button>
-    </div>
-
-    <!-- পোস্ট ফরম: রক্ত দান করতে চাই -->
-    <div id="post-give" class="page">
-        <h2>রক্ত দান করতে চাই</h2>
-        <input type="text" id="g-name" placeholder="আপনার নাম">
-        <input type="text" id="g-blood" placeholder="রক্তের গ্রুপ">
-        <input type="text" id="g-dist" placeholder="জেলা">
-        <input type="tel" id="g-phone" placeholder="ফোন নাম্বার">
-        <button onclick="addPost(document.getElementById('g-name').value, document.getElementById('g-blood').value, document.getElementById('g-phone').value)">পোস্ট করুন</button>
+        <button style="background: #333;" onclick="window.location.href='#'">MOHAMMAD MINHAZ</button>
+        <button onclick="document.getElementById('volunteer').style.display='none'; document.getElementById('home-page').style.display='block';">Back</button>
     </div>
 </div>
 
-<script>
-    setTimeout(() => { document.getElementById('splash').style.display = 'none'; }, 3000);
-    function addPost(name, blood, phone) {
-        document.getElementById('feed').innerHTML += `<div class='post-card'><strong>${name}</strong><br>রক্তের গ্রুপ: ${blood}<br><a href='tel:${phone}'><button style='margin-top:10px;'>কল করুন</button></a></div>`;
-        document.getElementById('post-need').style.display='none'; document.getElementById('post-give').style.display='none'; document.getElementById('home-page').style.display='block';
-    }
-</script>
 </body>
 </html>
