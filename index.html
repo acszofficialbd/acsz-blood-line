@@ -3,30 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACSZ - Secure Blood Line</title>
+    <title>ACSZ BLOOD LINE</title>
+    <!-- অ্যাপ আইকন হিসেবে আপনার লোগো সেট করা -->
+    <link rel="icon" href="1000087221.png">
     <style>
         :root { --primary: #B71C1C; --secondary: #1A237E; --bg: #F5F7FA; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; display: flex; justify-content: center; }
         .app { width: 100%; max-width: 450px; background: #ffffff; min-height: 100vh; position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
-        .header { background: linear-gradient(135deg, var(--primary), #D32F2F); color: white; padding: 30px 20px; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; }
+        /* লোগো সেকশন */
+        .logo-container { text-align: center; padding: 30px 0; }
+        .logo-container img { width: 120px; height: 120px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .header { text-align: center; padding-bottom: 20px; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 25px; }
         .card { background: white; padding: 20px; border-radius: 15px; border: 1px solid #eee; text-align: center; transition: 0.3s; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .card:active { transform: scale(0.95); background: #fdf0f0; border-color: var(--primary); }
+        .card:active { transform: scale(0.95); border-color: var(--primary); }
         .btn-main { background: var(--primary); color: white; border: none; padding: 15px; width: 90%; margin: 10px auto; display: block; border-radius: 10px; font-weight: bold; }
         .nav-bar { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: white; display: flex; justify-content: space-around; padding: 15px 0; border-top: 2px solid #f0f0f0; }
-        .sec-title { font-size: 18px; color: var(--secondary); font-weight: bold; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
 <div class="app">
+    <!-- লোগো এবং নাম -->
+    <div class="logo-container">
+        <img src="1000087221.png" alt="ACSZ Logo">
+        <h2 style="color: var(--primary); margin-top: 15px;">ACSZ BLOOD LINE</h2>
+    </div>
+
     <!-- হোম পেজ -->
     <div id="home-page">
-        <div class="header">
-            <h2 style="margin:0;">ACSZ BLOOD LINE</h2>
-            <p style="margin:5px 0; opacity:0.9;">Secure & Professional</p>
-        </div>
-
         <div class="grid">
             <div class="card" onclick="alert('রক্তের আবেদন অপশন...');">🩸<br>রক্তের আবেদন</div>
             <div class="card" onclick="alert('রক্তদাতা খুঁজুন অপশন...');">🔍<br>রক্তদাতা খুঁজুন</div>
@@ -38,7 +43,7 @@
 
     <!-- স্বেচ্ছাসেবক সেকশন -->
     <div id="volunteer" style="display:none; padding:20px;">
-        <h2 class="sec-title">Anowara Cyber Safety Zone</h2>
+        <h2 style="color: var(--secondary);">Anowara Cyber Safety Zone</h2>
         <button class="btn-main" onclick="window.location.href='https://www.facebook.com/share/17YCHDajei/'">Follow Now Official Page</button>
         <button class="btn-main" style="background: var(--secondary);" onclick="window.location.href='#'">MOHAMMAD MINHAZ</button>
         <button class="btn-main" style="background: #666;" onclick="document.getElementById('volunteer').style.display='none'; document.getElementById('home-page').style.display='block';">Back to Home</button>
