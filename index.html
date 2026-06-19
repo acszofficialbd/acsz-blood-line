@@ -317,8 +317,11 @@
         }
 
         function logout() { document.getElementById('main-dashboard').style.display = 'none'; document.getElementById('auth-screen').style.display = 'flex'; }
-    </script> // Your web app's Firebase configuration
-var firebaseConfig = {
+ <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
     apiKey: "AIzaSyAJsQSbWNb0pswDL-fBTiCqq2DdNgqy1Uw",
     authDomain: "acsz-blood-line.firebaseapp.com",
     databaseURL: "https://acsz-blood-line-default-rtdb.firebaseio.com",
@@ -327,9 +330,8 @@ var firebaseConfig = {
     messagingSenderId: "1051350416110",
     appId: "1:1051350416110:web:11cf58d8bbaf56678cd1ff",
     measurementId: "G-G7M3ENVKBF"
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-</body>
-</html>
+  };
+  
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
