@@ -94,7 +94,7 @@
         /* ৪. রক্ত আবেদনের ফর্ম স্ক্রিন */
         #request-screen { display: none; flex-direction: column; height: 100%; background: var(--bg-light); }
 
-        /* রিয়েল-টাইম ব্লাড পোস্ট কার্ড */
+        /* রিয়েল-টাইম ব্লাড পোস্টカード */
         .blood-post-card {
             background: var(--card-bg);
             border-radius: 14px;
@@ -204,27 +204,28 @@
 
     </div>
 
-    <!-- ফায়ারবেস ডাটাবেজ কানেক্ট করার কোড বা স্ক্রিপ্ট -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <!-- ফায়ারবেস স্ক্রিপ্ট লোড (সঠিক সংস্করণ) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 
     <script>
-        // এখানে আপনার ফায়ারবেসের রিয়েল কানেকশন বসবে
+        // আপনার আসল এবং একমাত্র ফায়ারবেস কনফিগারেশন
         var firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
+            apiKey: "AIzaSyAJsQSbWNb0pswDL-fBTiCqq2DdNgqy1Uw",
+            authDomain: "acsz-blood-line.firebaseapp.com",
+            databaseURL: "https://acsz-blood-line-default-rtdb.firebaseio.com",
+            projectId: "acsz-blood-line",
+            storageBucket: "acsz-blood-line.firebasestorage.app",
+            messagingSenderId: "1051350416110",
+            appId: "1:1051350416110:web:11cf58d8bbaf56678cd1ff",
+            measurementId: "G-G7M3ENVKBF"
+          };
         
         // ফায়ারবেস ইনিশিয়ালাইজেশন
-        if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+        firebase.initializeApp(firebaseConfig);
         var database = firebase.database();
 
-        // ৩ সেকেন্ড স্প্ল্যাশ স্ক্রিন
+        // ৩ সেকেন্ড স্প্ল্যাশ স্ক্রিন লোডিং ট্রানজিশন
         setTimeout(function() {
             document.getElementById('splash-screen').style.opacity = '0';
             setTimeout(function() {
@@ -243,7 +244,7 @@
             }
         }
 
-        // নিবন্ধন সেভ করার আসল ফাংশন
+        // নিবন্ধন সম্পন্ন করার ফাংশন
         function registerUser() {
             var name = document.getElementById('reg-name').value;
             var phone = document.getElementById('reg-phone').value;
@@ -251,9 +252,8 @@
             var blood = document.getElementById('reg-blood').value;
             var pass = document.getElementById('reg-pass').value;
 
-            if(!name || !phone || !pass) { alert('সবগুলো باکس সঠিকভাবে পূরণ করুন ভাই!'); return; }
+            if(!name || !phone || !pass) { alert('সবগুলো বক্স সঠিকভাবে পূরণ করুন ভাই!'); return; }
 
-            // ডাটাবেজে ইউজার সেভ হচ্ছে
             database.ref('users/' + phone).set({
                 name: name, phone: phone, location: location, blood: blood, password: pass
             }, function(error) {
@@ -271,7 +271,7 @@
         function showRequestScreen() { document.getElementById('request-screen').style.display = 'flex'; }
         function hideRequestScreen() { document.getElementById('request-screen').style.display = 'none'; }
 
-        // রক্তের নতুন আবেদন ডাটাবেজে পাঠানোর ফাংশন
+        // রক্তের নতুন আবেদন পোস্ট করা
         function submitBloodPost() {
             var pName = document.getElementById('post-name').value;
             var pBlood = document.getElementById('post-blood').value;
@@ -288,7 +288,7 @@
             });
         }
 
-        // ডাটাবেজ থেকে লাইভ পোস্টগুলো এনে স্ক্রিনে দেখানোর ফাংশন (সরাসরি কল বাটনসহ)
+        // ডাটাবেজ থেকে লাইভ পোস্টগুলো স্ক্রিনে দেখানো
         function loadLivePosts() {
             database.ref('blood_posts').on('value', function(snapshot) {
                 var container = document.getElementById('live-posts-container');
@@ -317,21 +317,6 @@
         }
 
         function logout() { document.getElementById('main-dashboard').style.display = 'none'; document.getElementById('auth-screen').style.display = 'flex'; }
- <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyAJsQSbWNb0pswDL-fBTiCqq2DdNgqy1Uw",
-    authDomain: "acsz-blood-line.firebaseapp.com",
-    databaseURL: "https://acsz-blood-line-default-rtdb.firebaseio.com",
-    projectId: "acsz-blood-line",
-    storageBucket: "acsz-blood-line.firebasestorage.app",
-    messagingSenderId: "1051350416110",
-    appId: "1:1051350416110:web:11cf58d8bbaf56678cd1ff",
-    measurementId: "G-G7M3ENVKBF"
-  };
-  
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-</script>
+    </script>
+</body>
+</html>
