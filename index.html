@@ -16,7 +16,6 @@
             --card-bg: #FFFFFF;
             --text-dark: #212121;
             --text-muted: #666666;
-            --tab-inactive: #E0E0E0;
         }
 
         * {
@@ -28,7 +27,7 @@
         }
 
         body {
-            background-color: var(--bg-light);
+            background-color: #111;
             color: var(--text-dark);
             display: flex;
             justify-content: center;
@@ -47,158 +46,269 @@
             overflow: hidden;
         }
 
-        .app-header {
+        /* ১. লোডিং স্ক্রিন */
+        #splash-screen {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            color: white;
-            padding: 20px 16px 15px;
-            text-align: left;
-            font-size: 20px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            flex-shrink: 0;
-        }
-
-        .sub-header {
-            background: var(--card-bg);
-            padding: 12px 16px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #ECEFF1;
-            flex-shrink: 0;
-        }
-        .sub-header .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-        .sub-header .logo-area i {
-            color: var(--primary-color);
-            font-size: 18px;
-        }
-        .sub-header .noti-btn {
-            background: none;
-            border: none;
-            font-size: 20px;
-            color: var(--text-dark);
-            cursor: pointer;
-        }
-
-        .app-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 16px;
-            padding-bottom: 90px; 
-        }
-
-        .page-view {
-            display: none;
-        }
-        .page-view.active {
-            display: block;
-        }
-
-        .welcome-card {
-            background: linear-gradient(135deg, #E53935, #C62828);
-            color: white;
-            padding: 24px;
-            border-radius: 18px;
-            margin-bottom: 20px;
-            box-shadow: 0 6px 15px rgba(229,57,53,0.25);
-            position: relative;
-        }
-        .welcome-card h3 { font-size: 24px; margin-bottom: 8px; }
-        .welcome-card p { font-size: 14px; opacity: 0.9; line-height: 1.5; }
-
-        .action-row {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        .action-btn {
-            flex: 1;
-            padding: 14px;
-            border: none;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            gap: 8px;
-        }
-        .btn-request { background: #FFFFFF; color: var(--primary-color); border: 1.5px solid var(--primary-color); }
-        .btn-search { background: var(--primary-color); color: white; }
-
-        .donor-list-banner {
-            background: linear-gradient(135deg, #00897B, #00695C);
+            align-items: center;
+            z-index: 9999;
             color: white;
-            padding: 16px;
+            transition: opacity 0.5s ease;
+        }
+        .loading-icon { font-size: 60px; animation: pulse 1.5s infinite; margin-bottom: 15px; }
+        .spinner { width: 30px; height: 30px; border: 3px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 1.0s linear infinite; margin-top: 20px; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 0.8; } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ২. লগইন ও নিবন্ধন স্ক্রিন */
+        #auth-screen { display: none; flex-direction: column; justify-content: center; padding: 30px 24px; height: 100%; background: var(--card-bg); overflow-y: auto; }
+        .auth-header { text-align: center; margin-bottom: 25px; }
+        .auth-header i { color: var(--primary-color); font-size: 45px; margin-bottom: 10px; }
+        .auth-header h2 { font-size: 26px; color: var(--primary-dark); }
+        
+        .tab-box { display: flex; margin-bottom: 20px; border-bottom: 2px solid #EEEEEE; }
+        .tab-btn { flex: 1; padding: 12px; background: none; border: none; font-size: 16px; font-weight: 600; color: var(--text-muted); cursor: pointer; text-align: center; }
+        .tab-btn.active { color: var(--primary-color); border-bottom: 2px solid var(--primary-color); }
+
+        .form-group { margin-bottom: 14px; position: relative; }
+        .form-group i { position: absolute; left: 12px; top: 38px; color: var(--text-muted); }
+        .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--text-dark); }
+        .form-group input, .form-group select { width: 100%; padding: 12px 12px 12px 38px; border: 1.5px solid #E0E0E0; border-radius: 10px; font-size: 14px; outline: none; }
+        .form-group input:focus, .form-group select:focus { border-color: var(--primary-color); }
+
+        .submit-btn { width: 100%; padding: 14px; background: var(--primary-color); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 10px rgba(211,47,47,0.2); }
+
+        /* ৩. মূল ড্যাশবোর্ড স্ক্রিন */
+        #main-dashboard { display: none; flex-direction: column; height: 100%; }
+        .app-header { background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); color: white; padding: 20px 16px 15px; font-size: 20px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+        .sub-header { background: var(--card-bg); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ECEFF1; }
+        .sub-header .logo-area { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; }
+        .sub-header .logo-area i { color: var(--primary-color); }
+        
+        .app-content { flex: 1; overflow-y: auto; padding: 16px; }
+        
+        /* ৪. রক্ত আবেদনের ফর্ম স্ক্রিন */
+        #request-screen { display: none; flex-direction: column; height: 100%; background: var(--bg-light); }
+
+        /* রিয়েল-টাইম ব্লাড পোস্ট কার্ড */
+        .blood-post-card {
+            background: var(--card-bg);
             border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 14px;
+            border-left: 5px solid var(--primary-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            cursor: pointer;
-            margin-bottom: 24px;
         }
-
-        .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 14px;
-            border-left: 4px solid var(--primary-color);
-            padding-left: 8px;
-        }
-        .dash-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
-        .grid-card {
-            background: var(--card-bg);
-            padding: 20px 16px;
-            border-radius: 14px;
-            border: 1px solid #E0E0E0;
-            cursor: pointer;
+        .post-info h4 { font-size: 18px; color: var(--primary-dark); margin-bottom: 4px; }
+        .post-info p { font-size: 13px; color: var(--text-muted); margin-bottom: 2px; }
+        .call-now-btn {
+            background: var(--accent-green);
+            color: white;
+            padding: 10px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
     </style>
 </head>
 <body>
+
     <div class="app-container">
-        <div class="app-header">ACSZ BLOOD LINE</div>
-        <div class="sub-header">
-            <div class="logo-area"><i class="fa-solid fa-droplet"></i> Anowara Cyber Safety Zone</div>
-            <button class="noti-btn"><i class="fa-regular fa-bell"></i></button>
+        
+        <div id="splash-screen">
+            <i class="fa-solid fa-heart-pulse loading-icon"></i>
+            <h2>ACSZ BLOOD LINE</h2>
+            <p style="font-size: 13px; opacity: 0.8; margin-top: 5px;">Anowara Cyber Safety Zone</p>
+            <div class="spinner"></div>
         </div>
-        <div class="app-content">
-            <div class="welcome-card">
-                <h3>রক্তদান জীবন বাঁচায়</h3>
-                <p>আপনার এক ব্যাগ রক্ত দিতে পারে অন্য একজনের নতুন জীবন। আজই রক্তদানে এগিয়ে আসুন।</p>
+
+        <div id="auth-screen">
+            <div class="auth-header"><i class="fa-solid fa-droplet"></i><h2>ACSZ BLOOD LINE</h2></div>
+            <div class="tab-box">
+                <div class="tab-btn active" id="login-tab" onclick="switchTab('login')">লগইন</div>
+                <div class="tab-btn" id="reg-tab" onclick="switchTab('reg')">নিবন্ধন</div>
             </div>
-            <div class="action-row">
-                <button class="action-btn btn-request"><i class="fa-solid fa-hand-holding-heart"></i> রক্ত লাগবে</button>
-                <button class="action-btn btn-search"><i class="fa-solid fa-magnifying-glass"></i> ডোনার খুঁজুন</button>
+            <div id="login-form">
+                <div class="form-group"><label>মোবাইল নম্বর</label><i class="fa-solid fa-phone"></i><input type="tel" id="login-phone" placeholder="আপনার মোবাইল নম্বর"></div>
+                <div class="form-group"><label>পাসওয়ার্ড</label><i class="fa-solid fa-lock"></i><input type="password" id="login-pass" placeholder="পাসওয়ার্ড দিন"></div>
+                <button class="submit-btn" onclick="enterApp()">প্রবেশ করুন</button>
             </div>
-            <div class="donor-list-banner">
-                <div>
-                    <h4 style="font-size:16px;">রক্তদাতাদের তালিকা</h4>
-                    <p style="font-size:12px; opacity:0.8;">আমাদের সক্রিয় রক্তদাতাদের প্রোফাইল দেখুন</p>
+            <div id="reg-form" style="display: none;">
+                <div class="form-group"><label>পূর্ণ নাম</label><i class="fa-solid fa-user"></i><input type="text" id="reg-name" placeholder="আপনার নাম"></div>
+                <div class="form-group"><label>মোবাইল নম্বর</label><i class="fa-solid fa-phone"></i><input type="tel" id="reg-phone" placeholder="মোবাইল নম্বর"></div>
+                <div class="form-group"><label>জেলা/এলাকা</label><i class="fa-solid fa-location-dot"></i><input type="text" id="reg-location" placeholder="যেমন: আনোয়ারা, চট্টগ্রাম"></div>
+                <div class="form-group">
+                    <label>রক্তের গ্রুপ</label><i class="fa-solid fa-layer-group"></i>
+                    <select id="reg-blood" style="padding-left:38px;"><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>O+</option><option>O-</option><option>AB+</option><option>AB-</option></select>
                 </div>
-                <i class="fa-solid fa-arrow-right"></i>
-            </div>
-            <div class="section-title">জরুরী রক্ত গ্রুপ সমূহ</div>
-            <div class="dash-grid">
-                <div class="grid-card"><h1 style="color:var(--primary-color);">A+</h1><p style="color:var(--text-muted); font-size:12px;">১০ জন উপলব্ধ</p></div>
-                <div class="grid-card"><h1 style="color:var(--primary-color);">B+</h1><p style="color:var(--text-muted); font-size:12px;">১৫ জন উপলব্ধ</p></div>
-                <div class="grid-card"><h1 style="color:var(--primary-color);">O+</h1><p style="color:var(--text-muted); font-size:12px;">৮ জন উপলব্ধ</p></div>
-                <div class="grid-card"><h1 style="color:var(--primary-color);">AB+</h1><p style="color:var(--text-muted); font-size:12px;">৩ জন উপলব্ধ</p></div>
+                <div class="form-group"><label>পাসওয়ার্ড</label><i class="fa-solid fa-lock"></i><input type="password" id="reg-pass" placeholder="নতুন পাসওয়ার্ড"></div>
+                <button class="submit-btn" onclick="registerUser()">নিবন্ধন সম্পন্ন করুন</button>
             </div>
         </div>
+
+        <div id="main-dashboard">
+            <div class="app-header">
+                <span>ACSZ BLOOD LINE</span>
+                <button onclick="logout()" style="background:none; border:none; color:white; font-size:16px;"><i class="fa-solid fa-right-from-bracket"></i></button>
+            </div>
+            <div class="sub-header">
+                <div class="logo-area"><i class="fa-solid fa-droplet"></i> Anowara Cyber Safety Zone</div>
+            </div>
+            <div class="app-content">
+                <div class="action-row" style="display:flex; gap:12px; margin-bottom:20px;">
+                    <button class="action-btn" onclick="showRequestScreen()" style="flex:1; padding:14px; background:#D32F2F; color:white; border:none; border-radius:12px; font-weight:600;"><i class="fa-solid fa-hand-holding-heart"></i> রক্ত লাগবে (আবেদন)</button>
+                </div>
+                
+                <div style="font-size: 18px; font-weight: 700; margin-bottom: 14px; border-left: 4px solid #D32F2F; padding-left: 8px;">জরুরী রক্তের আবেদনসমূহ</div>
+                
+                <div id="live-posts-container">
+                    <p style="text-align:center; color:var(--text-muted); font-size:14px;">কোনো অ্যাক্টিভ আবেদন নেই...</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="request-screen">
+            <div class="app-header">
+                <span>রক্তের আবেদন তৈরি করুন</span>
+                <button onclick="hideRequestScreen()" style="background:none; border:none; color:white; font-size:16px;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div style="padding: 20px;">
+                <div class="form-group"><label>রোগীর নাম/বিবরণ</label><input type="text" id="post-name" placeholder="যেমন: রহিমের মা"></div>
+                <div class="form-group">
+                    <label>প্রয়োজনীয় রক্তের গ্রুপ</label>
+                    <select id="post-blood"><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>O+</option><option>O-</option><option>AB+</option><option>AB-</option></select>
+                </div>
+                <div class="form-group"><label>হাসপাতাল ও এলাকা</label><input type="text" id="post-location" placeholder="যেমন: আনোয়ারা স্বাস্থ্য কমপ্লেক্স, চট্টগ্রাম"></div>
+                <div class="form-group"><label>যোগাযোগের মোবাইল নম্বর</label><input type="tel" id="post-phone" placeholder="মোবাইল নম্বর দিন"></div>
+                <button class="submit-btn" onclick="submitBloodPost()">আবেদনটি পোস্ট করুন</button>
+            </div>
+        </div>
+
     </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+    <script>
+        // এখানে আপনার ফায়ারবেসের রিয়েল কানেকশন বসবে
+        var firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        
+        // ফায়ারবেস ইনিশিয়ালাইজেশন
+        if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+        var database = firebase.database();
+
+        // ৩ সেকেন্ড স্প্ল্যাশ স্ক্রিন
+        setTimeout(function() {
+            document.getElementById('splash-screen').style.opacity = '0';
+            setTimeout(function() {
+                document.getElementById('splash-screen').style.display = 'none';
+                document.getElementById('auth-screen').style.display = 'flex';
+            }, 500);
+        }, 3000);
+
+        function switchTab(type) {
+            if(type === 'login') {
+                document.getElementById('login-tab').classList.add('active'); document.getElementById('reg-tab').classList.remove('active');
+                document.getElementById('login-form').style.display = 'block'; document.getElementById('reg-form').style.display = 'none';
+            } else {
+                document.getElementById('reg-tab').classList.add('active'); document.getElementById('login-tab').classList.remove('active');
+                document.getElementById('reg-form').style.display = 'block'; document.getElementById('login-form').style.display = 'none';
+            }
+        }
+
+        // নিবন্ধন সেভ করার আসল ফাংশন
+        function registerUser() {
+            var name = document.getElementById('reg-name').value;
+            var phone = document.getElementById('reg-phone').value;
+            var location = document.getElementById('reg-location').value;
+            var blood = document.getElementById('reg-blood').value;
+            var pass = document.getElementById('reg-pass').value;
+
+            if(!name || !phone || !pass) { alert('সবগুলো বক্স সঠিকভাবে পূরণ করুন ভাই!'); return; }
+
+            // ডাটাবেজে ইউজার সেভ হচ্ছে
+            database.ref('users/' + phone).set({
+                name: name, phone: phone, location: location, blood: blood, password: pass
+            }, function(error) {
+                if (error) { alert('সেভ হতে সমস্যা হয়েছে!'); } 
+                else { alert('আপনার নিবন্ধন সফল হয়েছে ভাই!'); enterApp(); }
+            });
+        }
+
+        function enterApp() {
+            document.getElementById('auth-screen').style.display = 'none';
+            document.getElementById('main-dashboard').style.display = 'flex';
+            loadLivePosts();
+        }
+
+        function showRequestScreen() { document.getElementById('request-screen').style.display = 'flex'; }
+        function hideRequestScreen() { document.getElementById('request-screen').style.display = 'none'; }
+
+        // রক্তের নতুন আবেদন ডাটাবেজে পাঠানোর ফাংশন
+        function submitBloodPost() {
+            var pName = document.getElementById('post-name').value;
+            var pBlood = document.getElementById('post-blood').value;
+            var pLoc = document.getElementById('post-location').value;
+            var pPhone = document.getElementById('post-phone').value;
+
+            if(!pName || !pPhone || !pLoc) { alert('দয়া করে সব তথ্য দিন ভাই!'); return; }
+
+            var newPostRef = database.ref('blood_posts').push();
+            newPostRef.set({
+                patientName: pName, bloodGroup: pBlood, location: pLoc, phone: pPhone
+            }, function(error) {
+                if(!error) { alert('রক্তের আবেদনটি সফলভাবে লাইভ পোস্ট হয়েছে!'); hideRequestScreen(); }
+            });
+        }
+
+        // ডাটাবেজ থেকে লাইভ পোস্টগুলো এনে স্ক্রিনে দেখানোর ফাংশন (সরাসরি কল বাটনসহ)
+        function loadLivePosts() {
+            database.ref('blood_posts').on('value', function(snapshot) {
+                var container = document.getElementById('live-posts-container');
+                container.innerHTML = '';
+                if(snapshot.exists()) {
+                    snapshot.forEach(function(childSnapshot) {
+                        var post = childSnapshot.val();
+                        var html = `
+                            <div class="blood-post-card">
+                                <div class="post-info">
+                                    <h4>প্রয়োজন: ${post.bloodGroup}</h4>
+                                    <p><strong>রোগী:</strong> ${post.patientName}</p>
+                                    <p><strong>স্থান:</strong> ${post.location}</p>
+                                </div>
+                                <a href="tel:${post.phone}" class="call-now-btn">
+                                    <i class="fa-solid fa-phone"></i> কল করুন
+                                </a>
+                            </div>
+                        `;
+                        container.innerHTML += html;
+                    });
+                } else {
+                    container.innerHTML = '<p style="text-align:center; color:var(--text-muted); font-size:14px;">কোনো অ্যাক্টিভ আবেদন নেই...</p>';
+                }
+            });
+        }
+
+        function logout() { document.getElementById('main-dashboard').style.display = 'none'; document.getElementById('auth-screen').style.display = 'flex'; }
+    </script>
 </body>
 </html>
