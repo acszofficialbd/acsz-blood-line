@@ -6,85 +6,60 @@
     <title>ACSZ BLOOD LINE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --blood-red: #B71C1C; --emerald-green: #2E7D32; --bg: #F8F9FA; }
-        body { margin: 0; font-family: sans-serif; background: var(--bg); display: flex; justify-content: center; height: 100vh; }
-        .app-container { width: 100%; max-width: 430px; background: white; height: 100vh; position: relative; overflow-y: auto; }
-        
-        /* স্প্ল্যাশ স্ক্রিন */
-        #splash { position: fixed; top:0; width: 100%; max-width: 430px; height: 100%; background: var(--blood-red); color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 999; }
-        
-        /* হোম পেজ */
-        .header { background: var(--blood-red); color: white; padding: 20px; font-weight: bold; font-size: 20px; text-align: center; }
-        .welcome-card { background: var(--blood-red); color: white; padding: 20px; margin: 15px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
-        .btn { flex: 1; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        
-        .donor-banner { background: var(--emerald-green); color: white; padding: 15px; margin: 0 15px; border-radius: 10px; text-align: center; font-weight: bold; }
-        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; margin-bottom: 70px; }
-        .card { background: white; border: 1px solid #ddd; padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        
-        .nav-bar { display: flex; justify-content: space-around; padding: 15px; border-top: 1px solid #ddd; position: fixed; bottom: 0; width: 100%; max-width: 430px; background: white; z-index: 100; }
+        :root { --red: #B71C1C; --green: #2E7D32; --bg: #f4f4f4; }
+        body { margin: 0; font-family: sans-serif; background: var(--bg); display: flex; justify-content: center; }
+        .app { width: 100%; max-width: 450px; background: white; min-height: 100vh; position: relative; }
+        #splash { position: fixed; width: 100%; max-width: 450px; height: 100%; background: var(--red); color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; }
+        .page { padding: 20px; display: none; }
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: var(--red); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .header { background: var(--red); color: white; padding: 20px; text-align: center; font-weight: bold; font-size: 20px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; }
+        .card { background: #fff; padding: 20px; border-radius: 10px; border: 1px solid #ddd; text-align: center; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-weight: bold; }
+        .nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: #fff; display: flex; justify-content: space-around; padding: 15px; border-top: 2px solid var(--red); }
     </style>
 </head>
 <body>
 
-    <!-- স্প্ল্যাশ স্ক্রিন -->
-    <div id="splash">
-        <h1 style="margin:0;">ACSZ BLOOD LINE</h1>
-        <p style="position:absolute; bottom:20px; font-size:12px; letter-spacing:2px;">DEVELOPER BY MOHAMMAD MINHAZ</p>
-    </div>
+<div id="splash"><h1>ACSZ BLOOD LINE</h1><p>DEVELOPER BY MOHAMMAD MINHAZ</p></div>
 
-    <!-- মেইন অ্যাপ -->
-    <div class="app-container" id="main-ui" style="display:none;">
-        <div class="header">ACSZ BLOOD LINE</div>
-        <div class="welcome-card">
-            <div id="user-name-display">স্বাগতম, ইউজার!</div>
-            <div class="btn-group">
-                <button class="btn" style="background:white; color:var(--blood-red);">+ রক্তের আবেদন</button>
-                <button class="btn" style="background:transparent; border:1px solid white;">Q রক্তদাতা খুঁজুন</button>
-            </div>
-        </div>
-
-        <div class="donor-banner">Donor List (রক্তদাতা তালিকা)</div>
-
-        <div class="dashboard">
-            <div class="card"><i class="fa-solid fa-rss"></i><br>Blood Feed</div>
-            <div class="card"><i class="fa-solid fa-list"></i><br>My Requests</div>
-            <div class="card"><i class="fa-solid fa-heart"></i><br>উপকারিতা</div>
-            <div class="card" onclick="window.open('https://www.facebook.com/share/17YCHDajei/', '_blank')">
-                <i class="fa-solid fa-users"></i><br>স্বেচ্ছাসেবক
-            </div>
-        </div>
-
-        <div class="nav-bar">
-            <div onclick="window.open('https://www.facebook.com/share/1C3HtgVmWo/', '_blank')"><i class="fa-solid fa-user"></i><br>Profile</div>
-            <div><i class="fa-solid fa-magnifying-glass"></i><br>Donor</div>
-            <div style="color:var(--blood-red); font-size:24px;"><i class="fa-solid fa-plus-circle"></i></div>
-            <div><i class="fa-solid fa-rss"></i><br>Feed</div>
-            <div><i class="fa-solid fa-house"></i><br>Home</div>
-        </div>
-    </div>
-
-    <!-- লগইন পেজ -->
-    <div id="login-ui" style="padding: 40px; display:none; text-align:center;">
+<div class="app">
+    <div id="reg-page" class="page">
         <h2>নিবন্ধন করুন</h2>
-        <input type="text" id="name" placeholder="আপনার নাম লিখুন" style="padding:10px; width:80%;"><br><br>
-        <button onclick="saveUser()" style="padding:10px 20px; background:var(--blood-red); color:white; border:none;">শুরু করুন</button>
+        <input type="text" id="name" placeholder="নাম">
+        <input type="tel" id="mobile" placeholder="মোবাইল">
+        <input type="password" id="pass" placeholder="পাসওয়ার্ড">
+        <select id="district"><option>জেলা নির্বাচন করুন</option><option>Chattogram</option><option>Dhaka</option></select>
+        <button onclick="register()">নিবন্ধন কনফার্ম করুন</button>
     </div>
 
-    <script>
-        setTimeout(() => { document.getElementById('splash').style.display = 'none'; checkUser(); }, 3000);
-        function checkUser() {
-            if(localStorage.getItem("isRegistered")) {
-                document.getElementById('main-ui').style.display = 'block';
-                document.getElementById('user-name-display').innerText = "স্বাগতম, " + localStorage.getItem("userName") + "!";
-            } else { document.getElementById('login-ui').style.display = 'block'; }
-        }
-        function saveUser() {
-            localStorage.setItem("isRegistered", "true");
-            localStorage.setItem("userName", document.getElementById('name').value);
-            location.reload();
-        }
-    </script>
+    <div id="home-page" class="page">
+        <div class="header">ACSZ BLOOD LINE</div>
+        <div class="grid">
+            <div class="card">🩸 Blood Feed</div>
+            <div class="card">📝 My Requests</div>
+            <div class="card">💡 উপকারিতা</div>
+            <div class="card" onclick="showVolunteer()">🛡️ স্বেচ্ছাসেবক</div>
+            <div class="card" style="grid-column: span 2;">👥 ডোনার লিস্ট</div>
+        </div>
+        <div class="nav">
+            <i class="fa fa-home"></i>
+            <i class="fa fa-search"></i>
+            <i class="fa fa-plus-circle" style="color:var(--red);"></i>
+            <i class="fa fa-user"></i>
+        </div>
+    </div>
+</div>
+
+<script>
+    setTimeout(() => { 
+        document.getElementById('splash').style.display = 'none'; 
+        document.getElementById('home-page').style.display = 'block'; 
+    }, 3000);
+    function register() { alert("নিবন্ধন সফল!"); }
+    function showVolunteer() {
+        alert("আপনার নাম: Mohammad Minhaz\nপার্সোনাল আইডি: https://www.facebook.com/share/1C3HtgVmWo/\nঅফিসিয়াল পেজ: https://www.facebook.com/share/17YCHDajei/");
+    }
+</script>
 </body>
 </html>
