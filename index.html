@@ -1,84 +1,517 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACSZ BLOOD LINE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root { --primary-color: #D32F2F; --bg-light: #F8F9FA; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Hind Siliguri', sans-serif; }
-        body { background: #e0e0e0; display: flex; justify-content: center; min-height: 100vh; }
-        .app-container { width: 100%; max-width: 430px; height: 100vh; background: white; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-        
-        /* Splash Screen */
-        #page-splash { position: absolute; width: 100%; height: 100%; background: var(--primary-color); display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; z-index: 1000; }
-        
-        /* Pages */
-        .page-view { display: none; flex: 1; overflow-y: auto; padding: 20px; }
-        .page-view.active { display: block; }
-        
-        /* Auth Styles */
-        .auth-container { display: flex; flex-direction: column; justify-content: center; height: 100%; }
-        .form-control { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; }
-        .btn-main { width: 100%; padding: 14px; background: var(--primary-color); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACSZ BLOOD LINE</title>
 
-        /* Header */
-        .header { display: flex; align-items: center; justify-content: space-between; padding: 15px; border-bottom: 1px solid #eee; font-weight: bold; color: var(--primary-color); }
-        .welcome-card { background: var(--primary-color); color: white; padding: 20px; border-radius: 15px; margin-top: 15px; }
-    </style>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Hind Siliguri',sans-serif;
+}
+
+body{
+background:#ececec;
+display:flex;
+justify-content:center;
+}
+
+.app{
+width:100%;
+max-width:430px;
+height:100vh;
+background:white;
+overflow:hidden;
+position:relative;
+}
+
+:root{
+--red:#d32f2f;
+--white:#fff;
+--bg:#f5f5f5;
+}
+
+.page{
+display:none;
+height:100vh;
+overflow-y:auto;
+background:var(--bg);
+}
+
+.active{
+display:block;
+}
+
+/* Splash */
+
+#splash{
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:var(--red);
+color:white;
+position:absolute;
+width:100%;
+height:100%;
+z-index:999;
+}
+
+.logo{
+font-size:70px;
+margin-bottom:15px;
+}
+
+.dev{
+margin-top:15px;
+font-size:14px;
+}
+
+/* Auth */
+
+.auth{
+padding:25px;
+margin-top:60px;
+}
+
+.title{
+text-align:center;
+color:var(--red);
+margin-bottom:20px;
+}
+
+.input{
+width:100%;
+padding:14px;
+border:none;
+outline:none;
+border-radius:12px;
+margin-bottom:12px;
+background:white;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.btn{
+width:100%;
+padding:14px;
+border:none;
+background:var(--red);
+color:white;
+border-radius:12px;
+font-weight:bold;
+font-size:16px;
+}
+
+.link{
+text-align:center;
+margin-top:15px;
+color:var(--red);
+}
+
+/* Header */
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px;
+background:white;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.header h2{
+color:var(--red);
+font-size:18px;
+}
+
+.notify{
+font-size:22px;
+}
+
+/* Welcome */
+
+.welcome{
+margin:15px;
+padding:20px;
+background:linear-gradient(45deg,#d32f2f,#ff5252);
+color:white;
+border-radius:20px;
+}
+
+/* Cards */
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+padding:15px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+
+.card i{
+font-size:28px;
+color:#d32f2f;
+margin-bottom:10px;
+}
+
+.bottom{
+position:fixed;
+bottom:0;
+width:100%;
+max-width:430px;
+display:flex;
+justify-content:space-around;
+background:white;
+padding:15px;
+box-shadow:0 -2px 10px rgba(0,0,0,.1);
+}
+
+.bottom i{
+font-size:20px;
+color:#d32f2f;
+}
+
+.social{
+background:white;
+margin:15px;
+padding:20px;
+border-radius:20px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.social a{
+display:block;
+padding:10px;
+text-decoration:none;
+color:black;
+}
+
+</style>
 </head>
+
 <body>
 
-<div class="app-container">
-    <!-- ১. স্প্ল্যাশ স্ক্রিন -->
-    <div id="page-splash">
-        <i class="fa-solid fa-droplet" style="font-size: 60px;"></i>
-        <h1 style="margin: 20px 0;">ACSZ BLOOD LINE</h1>
-        <p>DEVELOPED BY MOHAMMAD MINHAZ</p>
-    </div>
+<div class="app">
 
-    <!-- ২. লগইন ও নিবন্ধন -->
-    <div id="page-auth" class="page-view">
-        <div class="auth-container">
-            <h2 id="auth-title" style="margin-bottom: 20px; text-align: center;">নিবন্ধন করুন</h2>
-            <input type="text" class="form-control" placeholder="আপনার নাম">
-            <input type="tel" class="form-control" placeholder="মোবাইল নাম্বার">
-            <input type="password" class="form-control" placeholder="পাসওয়ার্ড">
-            <button class="btn-main" onclick="navigateTo('home')">নিবন্ধন করুন</button>
-            <p style="text-align: center; margin-top: 15px;" onclick="document.getElementById('auth-title').innerText='লগইন'"><u>লগইন করুন</u></p>
-        </div>
-    </div>
+<!-- SPLASH -->
 
-    <!-- ৩. হোম পেজ -->
-    <div id="page-home" class="page-view">
-        <div class="header">
-            <span><i class="fa-solid fa-droplet"></i> ACSZ BLOOD LINE</span>
-            <i class="fa-regular fa-bell"></i>
-        </div>
-        <div class="welcome-card">
-            <h3>স্বাগতম!</h3>
-            <p>আপনার অ্যাকাউন্টটি সক্রিয় রয়েছে।</p>
-        </div>
-        <div style="margin-top:20px;">
-            <button class="btn-main" onclick="alert('আবেদনের ফর্ম শীঘ্রই আসছে')">রক্তের আবেদন</button>
-            <button class="btn-main" style="background:#2E7D32; margin-top:10px;">রক্তদাতা খুঁজুন</button>
-        </div>
-    </div>
+<div id="splash">
+<i class="fa-solid fa-droplet logo"></i>
+
+<h1>ACSZ BLOOD LINE</h1>
+
+<div class="dev">
+DEVELOPED BY MOHAMMAD MINHAJ
 </div>
 
-<script>
-    // স্প্ল্যাশ লজিক
-    setTimeout(() => {
-        document.getElementById('page-splash').style.display = 'none';
-        document.getElementById('page-auth').classList.add('active');
-    }, 3000);
+</div> <!-- LOGIN PAGE -->
 
-    function navigateTo(pageId) {
-        document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
-        document.getElementById('page-' + pageId).classList.add('active');
-    }
+<div class="page active" id="login">
+
+<div class="auth">
+
+<h2 class="title">লগইন করুন</h2>
+
+<input type="number" class="input" id="loginPhone"
+placeholder="মোবাইল নাম্বার">
+
+<input type="password" class="input" id="loginPass"
+placeholder="পাসওয়ার্ড">
+
+<button class="btn" onclick="login()">
+লগইন করুন
+</button>
+
+<div class="link" onclick="showRegister()">
+নতুন অ্যাকাউন্ট তৈরি করুন
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- REGISTER PAGE -->
+
+<div class="page" id="register">
+
+<div class="auth">
+
+<h2 class="title">নিবন্ধন করুন</h2>
+
+<input class="input" id="name"
+placeholder="আপনার নাম">
+
+<input class="input" id="phone"
+placeholder="মোবাইল নাম্বার">
+
+<input class="input" id="email"
+placeholder="ইমেইল">
+
+<input class="input" id="password"
+type="password"
+placeholder="নতুন পাসওয়ার্ড">
+
+<select class="input" id="blood">
+
+<option>A+</option>
+<option>A-</option>
+<option>B+</option>
+<option>B-</option>
+<option>AB+</option>
+<option>AB-</option>
+<option>O+</option>
+<option>O-</option>
+
+</select>
+
+<select class="input" id="district">
+
+<option>চট্টগ্রাম</option>
+<option>ঢাকা</option>
+<option>কুমিল্লা</option>
+<option>নোয়াখালী</option>
+<option>সিলেট</option>
+<option>রাজশাহী</option>
+<option>খুলনা</option>
+
+</select>
+
+<button class="btn" onclick="register()">
+নিবন্ধন করুন
+</button>
+
+<div class="link" onclick="showLogin()">
+আগে থেকেই অ্যাকাউন্ট আছে?
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- HOME PAGE -->
+
+<div class="page" id="home">
+
+<div class="header">
+
+<h2>
+<i class="fa-solid fa-droplet"></i>
+ACSZ BLOOD LINE
+</h2>
+
+<div class="notify">
+<i class="fa-regular fa-bell"></i>
+</div>
+
+</div>
+
+
+
+<div class="welcome">
+
+<h2>স্বাগতম</h2>
+
+<p id="username">
+ACSZ USER
+</p>
+
+</div>
+
+
+
+<div class="grid">
+
+<div class="card">
+<i class="fa-solid fa-hand-holding-droplet"></i>
+<h4>রক্তের আবেদন</h4>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-magnifying-glass"></i>
+<h4>রক্তদাতা খুঁজুন</h4>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-newspaper"></i>
+<h4>Blood Feed</h4>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-list"></i>
+<h4>My Request</h4>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-heart"></i>
+<h4>রক্তদানের উপকারিতা</h4>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-book"></i>
+<h4>রক্ত দিতে কী কী লাগে</h4>
+</div>
+
+</div> <!-- SOCIAL BOX -->
+
+<div class="social">
+
+<h3>🌐 আমাদের সাথে যুক্ত থাকুন</h3>
+
+<a href="#">
+<i class="fa-brands fa-facebook"></i>
+Official Page
+</a>
+
+<a href="#">
+<i class="fa-solid fa-user"></i>
+Personal Page
+</a>
+
+<a href="#">
+<i class="fa-brands fa-whatsapp"></i>
+WhatsApp
+</a>
+
+<a href="#">
+<i class="fa-brands fa-telegram"></i>
+Telegram
+</a>
+
+<a href="#">
+<i class="fa-brands fa-youtube"></i>
+YouTube
+</a>
+
+</div>
+
+
+<!-- BOTTOM MENU -->
+
+<div class="bottom">
+
+<div>
+<i class="fa-solid fa-house"></i>
+</div>
+
+<div>
+<i class="fa-solid fa-newspaper"></i>
+</div>
+
+<div>
+<i class="fa-solid fa-file-circle-plus"></i>
+</div>
+
+<div>
+<i class="fa-solid fa-user"></i>
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+setTimeout(function(){
+
+document.getElementById("splash").style.display="none";
+
+document.getElementById("login").style.display="block";
+
+},3000);
+
+
+
+function showRegister(){
+
+document.getElementById("login").style.display="none";
+
+document.getElementById("register").style.display="block";
+
+}
+
+
+
+function showLogin(){
+
+document.getElementById("register").style.display="none";
+
+document.getElementById("login").style.display="block";
+
+}
+
+
+
+function register(){
+
+let name=document.getElementById("name").value;
+
+let phone=document.getElementById("phone").value;
+
+let email=document.getElementById("email").value;
+
+let password=document.getElementById("password").value;
+
+localStorage.setItem("name",name);
+
+localStorage.setItem("phone",phone);
+
+localStorage.setItem("password",password);
+
+alert("নিবন্ধন সফল হয়েছে");
+
+showLogin();
+
+}
+
+
+
+function login(){
+
+let phone=document.getElementById("loginPhone").value;
+
+let pass=document.getElementById("loginPass").value;
+
+if(phone==localStorage.getItem("phone")
+&& pass==localStorage.getItem("password")){
+
+document.getElementById("login").style.display="none";
+
+document.getElementById("home").style.display="block";
+
+document.getElementById("username").innerHTML=
+localStorage.getItem("name");
+
+}else{
+
+alert("মোবাইল নাম্বার অথবা পাসওয়ার্ড ভুল");
+
+}
+
+}
+
 </script>
 
 </body>
